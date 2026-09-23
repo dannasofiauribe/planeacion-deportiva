@@ -1,0 +1,5 @@
+const SUPABASE_URL= 'HTTPS:/nrglivxwkqglqcndzbid/';
+ const SUPERBASE_ANON_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5yZ2xpdnh3a3FnbHFjbmR6YmlkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk0MTA5NTgsImV4cCI6MjEwNDk4Njk1OH0.1fOIITzZHcKg0u5i2qVRxTsEJn0sF7OZB0KuJRU06-k'
+
+ export const db=
+ spabase.createClient(SUPABASE_URL,SUPERBASE_ANON_KEY);
