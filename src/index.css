@@ -1,41 +1,89 @@
 @import "tailwindcss";
 
 body {
-    background: linear-gradient(to bottom, #5a0d0d, #260000, #0d0d0d);
+    background: linear-gradient(to bottom, #3b0505, #1a0000, #080000);
     background-attachment: fixed;
     min-height: 100vh;
     color: #ffffff;
-    font-family: Arial, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     margin: 0;
     padding: 0;
     text-align: center;
 }
 
-/* Título superior elegante que indica dónde estás */
+/* Header superior con logo */
 .current-page-header {
-    background-color: rgba(0, 0, 0, 0.4);
-    padding: 15px;
-    font-size: 1.2rem;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 12px 20px;
+    font-size: 1.15rem;
     font-weight: bold;
     color: #ff4d4d;
     border-bottom: 2px solid #b31414;
     letter-spacing: 2px;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+/* Barra de navegación de pestañas */
+.nav-bar {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin: 15px 0 20px 0;
+    flex-wrap: wrap;
+}
+
+.nav-link {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 7px 18px;
+    background: rgba(0, 0, 0, 0.45);
+    border: 1px solid rgba(255, 77, 77, 0.4);
+    border-radius: 6px;
+    font-weight: bold;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.95rem;
+}
+
+.nav-link:hover {
+    background: rgba(255, 77, 77, 0.2);
+    border-color: #ff4d4d;
+}
+
+.nav-link.active {
+    color: #ffdd44 !important;
+    border-color: #ffcc00 !important;
+    background: rgba(255, 204, 0, 0.15) !important;
+    box-shadow: 0 0 12px rgba(255, 204, 0, 0.35);
 }
 
 .container {
     width: 90%;
     max-width: 900px;
-    margin: 20px auto;
-    padding: 20px;
+    margin: 10px auto;
+    padding: 15px 20px;
+    text-align: center;
+}
+
+.wide-container {
+    width: 95%;
+    max-width: 1050px;
+    margin: 0 auto;
+    padding: 10px 15px;
     text-align: center;
 }
 
 h1 {
     color: #ffffff;
-    font-size: 2.2rem;
-    margin-top: 15px;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    font-size: 2.1rem;
+    margin-top: 10px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
     font-weight: bold;
 }
 
@@ -45,20 +93,22 @@ p {
 
 /* Tarjetas rojas */
 .card {
-    background-color: #b31414;
-    padding: 25px;
-    margin: 20px auto;
-    width: 85%;
-    max-width: 500px;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    background-color: #8b0000;
+    border: 1px solid rgba(255, 77, 77, 0.6);
+    padding: 22px;
+    margin: 18px auto;
+    width: 90%;
+    max-width: 580px;
+    border-radius: 10px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.6);
     text-align: center;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .card h3 {
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     color: #ffffff;
-    font-size: 1.3rem;
+    font-size: 1.35rem;
     font-weight: bold;
 }
 
@@ -69,45 +119,34 @@ p {
 /* Botones */
 .btn {
     display: inline-block;
-    padding: 10px 25px;
+    padding: 10px 24px;
     background-color: #ffffff;
     color: #b31414;
     text-decoration: none;
-    border-radius: 4px;
-    margin-top: 15px;
+    border-radius: 5px;
+    margin-top: 14px;
     font-weight: bold;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     cursor: pointer;
     border: none;
-    font-size: 1rem;
-    font-family: Arial, sans-serif;
+    font-size: 0.95rem;
+    transition: background-color 0.15s ease;
 }
 
 .btn:hover {
     background-color: #f1f1f1;
 }
 
-.back-btn {
-    display: inline-block;
-    margin: 15px 0;
-    color: #ffffff;
-    text-decoration: none;
-    font-weight: bold;
-    cursor: pointer;
-    border: none;
-    background: transparent;
-}
-
 /* Tablas */
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
-    background-color: rgba(0, 0, 0, 0.4);
+    margin-top: 15px;
+    background-color: rgba(0, 0, 0, 0.45);
 }
 
 th, td {
-    padding: 12px;
+    padding: 10px 14px;
     border: 1px solid #ff4d4d;
     text-align: left;
     color: #ffffff;
@@ -116,4 +155,9 @@ th, td {
 th {
     background-color: #7a1212;
     color: #ffffff;
+    font-weight: bold;
+}
+
+tr:hover td {
+    background-color: rgba(255, 77, 77, 0.08);
 }
