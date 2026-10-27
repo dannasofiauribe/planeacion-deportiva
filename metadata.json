@@ -1,0 +1,6 @@
+{
+  "name": "Planeación Deportiva | I.E. Inocencio Chincá",
+  "description": "Sistema de gestión para la organización, planeación y control de torneos deportivos escolares en la Institución Educativa Inocencio Chincá.",
+  "permissions": [],
+  "capabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
