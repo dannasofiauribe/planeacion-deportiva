@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guion Completo y Exhaustivo de Sustentación | Intercursos Chincá - Grado 1102</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap');
+
+    :root {
+      --primary: #800000;
+      --primary-dark: #4d0000;
+      --gold: #b45309;
+      --gold-light: #fef3c7;
+      --dark: #0f172a;
+      --text: #1e293b;
+      --bg: #f8fafc;
+      --border: #e2e8f0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Merriweather', serif;
+      background: #f1f5f9;
+      color: var(--text);
+      line-height: 1.85;
+      font-size: 15px;
+    }
+
+    .top-bar-no-print {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      background: #0f172a;
+      color: white;
+      padding: 16px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    .btn-pdf {
+      background: #dc2626;
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 15px;
+      padding: 12px 26px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);
+    }
+
+    .btn-pdf:hover {
+      background: #b91c1c;
+      transform: translateY(-2px);
+    }
+
+    .document-page {
+      max-width: 880px;
+      margin: 40px auto;
+      background: #ffffff;
+      padding: 60px 75px;
+      border-radius: 10px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+    }
+
+    .header-section {
+      border-bottom: 4px solid var(--primary);
+      padding-bottom: 25px;
+      margin-bottom: 35px;
+      text-align: center;
+    }
+
+    .institution-tag {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    .doc-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 26px;
+      font-weight: 900;
+      color: #0f172a;
+      line-height: 1.3;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    .doc-subtitle {
+      font-size: 15px;
+      color: #475569;
+      font-style: italic;
+      margin-bottom: 20px;
+    }
+
+    .meta-box {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-left: 5px solid var(--primary);
+      border-radius: 8px;
+      padding: 18px 22px;
+      text-align: left;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+    }
+
+    .meta-item b {
+      display: block;
+      color: #64748b;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+
+    .meta-item span {
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .chapter {
+      margin-top: 45px;
+      padding-top: 25px;
+      border-top: 2px dashed #cbd5e1;
+    }
+
+    .chapter:first-of-type {
+      border-top: none;
+      margin-top: 30px;
+    }
+
+    .chapter-heading {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .speaker-banner {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      background: #eff6ff;
+      border-left: 4px solid #2563eb;
+      color: #1e40af;
+      padding: 8px 16px;
+      border-radius: 4px;
+      margin-bottom: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .speech-paragraph {
+      margin-bottom: 22px;
+      text-align: justify;
+      color: #1e293b;
+    }
+
+    .speech-paragraph strong {
+      color: #0f172a;
+      font-weight: 700;
+    }
+
+    .stage-note {
+      font-family: 'Montserrat', sans-serif;
+      background: #fffbeb;
+      border-left: 4px solid #f59e0b;
+      padding: 10px 16px;
+      margin: 15px 0 22px 0;
+      border-radius: 0 6px 6px 0;
+      font-size: 13px;
+      color: #92400e;
+      font-style: italic;
+    }
+
+    .qa-box {
+      margin-top: 40px;
+      background: #fdf2f8;
+      border: 1px solid #fbcfe8;
+      border-radius: 8px;
+      padding: 24px;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .qa-box h3 {
+      color: #9d174d;
+      font-size: 16px;
+      font-weight: 800;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+    }
+
+    .qa-item {
+      margin-bottom: 16px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid #f472b6;
+    }
+
+    .qa-item:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .qa-item strong {
+      color: #831843;
+      display: block;
+      margin-bottom: 4px;
+      font-size: 13.5px;
+    }
+
+    .qa-item p {
+      font-family: 'Merriweather', serif;
+      color: #4c0519;
+      font-size: 13.5px;
+      margin: 0;
+    }
+
+    @media print {
+      body {
+        background: white !important;
+        font-size: 11.5pt;
+        line-height: 1.6;
+      }
+      .top-bar-no-print {
+        display: none !important;
+      }
+      .document-page {
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        box-shadow: none !important;
+      }
+      .chapter {
+        page-break-inside: auto;
+      }
+      @page {
+        margin: 18mm 18mm 18mm 18mm;
+        size: letter portrait;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar-no-print">
+    <div>
+      <strong style="font-family: 'Montserrat', sans-serif; font-size: 16px;">📜 GUION COMPLETO Y EXHAUSTIVO DE SUSTENTACIÓN</strong>
+      <span style="opacity: 0.8; font-size: 13px; margin-left: 10px;">I.E. Inocencio Chincá • SENATIC • Grado 1102</span>
+    </div>
+    <button class="btn-pdf" onclick="window.print()">
+      🖨️ Descargar Guion Completo en PDF (Imprimir)
+    </button>
+  </div>
+
+  <div class="document-page">
+
+    <div class="header-section">
+      <div class="institution-tag">Articulación con la Educación Media • SENATIC</div>
+      <h1 class="doc-title">Guion de Sustentación Integral y Técnico</h1>
+      <p class="doc-subtitle">Sistema Web de Planeación Deportiva Escolar "Intercursos Chincá"</p>
+
+      <div class="meta-box">
+        <div class="meta-item">
+          <b>Institución Educativa</b>
+          <span>I.E. Inocencio Chincá</span>
+        </div>
+        <div class="meta-item">
+          <b>Grado</b>
+          <span>1102</span>
+        </div>
+        <div class="meta-item">
+          <b>Equipo Desarrollador</b>
+          <span>Danna Sofía Uribe Higuera<br>Nikol Dayanna Alvarado Montoya<br>María Ignacia Salón Camargo</span>
+        </div>
+        <div class="meta-item">
+          <b>Tipo de Presentación</b>
+          <span>Defensa Oral y Demostración Técnica</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECCIÓN 1: APERTURA Y PROBLEMÁTICA -->
+    <div class="chapter">
+      <div class="chapter-heading">1. Apertura Oficial, Protocolo y Contexto Institucional</div>
+      <div class="speaker-banner">
+        <span>EXPOSITORA PRINCIPAL:</span>
+        <span>DANNA SOFÍA URIBE HIGUERA</span>
+      </div>
+
+      <p class="speech-paragraph">
+        "Muy buenos días tengan todos los distinguidos miembros del jurado calificador, directivos, docentes de la Institución Educativa Inocencio Chincá, instructores del programa <strong>SENATIC</strong> y compañeros de clase que nos acompañan en esta sustentación.
+      </p>
+
+      <p class="speech-paragraph">
+        Para nosotras es un inmenso honor estar hoy aquí frente a ustedes. Mi nombre es <strong>Danna Sofía Uribe Higuera</strong>, y junto a mis dos compañeras de equipo, <strong>Nikol Dayanna Alvarado Montoya</strong> y <strong>María Ignacia Salón Camargo</strong>, estudiantes del grado <strong>1102</strong>, venimos a defender con profundo orgullo y compromiso nuestro proyecto formativo: <strong>Intercursos Chincá — Sistema Web de Planeación y Gestión Deportiva Escolar</strong>, desarrollado bajo el lema: <em>'Automatizando la pasión, organizando el juego'</em>.
+      </p>
+
+      <div class="stage-note">
+        💡 Pauta de oratoria: Postura firme, contacto visual directo con cada evaluador, tono entusiasta y seguro de sí misma.
+      </div>
+    </div>
+
+    <!-- SECCIÓN 2: PLANTEAMIENTO DEL PROBLEMA DETALLADO -->
+    <div class="chapter">
+      <div class="chapter-heading">2. Planteamiento del Problema en Nuestra Institución</div>
+      <div class="speaker-banner">
+        <span>EXPOSITORA:</span>
+        <span>DANNA SOFÍA URIBE HIGUERA</span>
+      </div>
+
+      <p class="speech-paragraph">
+        "Para comprender el valor real de esta plataforma, es fundamental recordar lo que sucede año tras año en nuestro colegio cuando se convoca el torneo intercursos. El deporte es, sin duda, la actividad comunitaria que más entusiasma y une a los estudiantes del Chincá. Sin embargo, su logística y organización tradicionalmente han padecido serias dificultades debido a la <strong>absoluta dependencia del papel y los métodos manuales</strong>.
+      </p>
+
+      <p class="speech-paragraph">
+        Hasta el día de hoy, las inscripciones de los salones y los resultados de los partidos se llevaban en planillas físicas de papel. ¿Qué provocaba esto? En primer lugar, <strong>pérdida constante de información</strong>: las hojas se traspapelaban, se deterioraban con el sudor, la lluvia o se manchaban durante los descansos. En segundo lugar, se generaban reiterados <strong>cruces de canchas y solapamiento de horarios</strong>. Era una escena común ver a dos grados distintos llegar con uniforme a la misma hora para disputar la Cancha Principal o la Cancha Múltiple, lo que desembocaba en discusiones, desorden y retrasos monumentales en el calendario escolar.
+      </p>
+
+      <p class="speech-paragraph">
+        En tercer lugar, existía una <strong>desinformación total en la comunidad estudiantil</strong>. Para saber contra qué grado se jugaba, en qué fecha o a qué hora, los alumnos debían pasar el descanso completo persiguiendo a los profesores del área de educación física por los pasillos para preguntarles. Y en cuarto lugar, se presentaban <strong>sospechas y reclamos sobre los marcadores</strong> y la clasificación de los equipos, ya que no existía una fuente digital, pública, transparente y verificable en tiempo real.
+      </p>
+
+      <p class="speech-paragraph">
+        Fue frente a este diagnóstico real que nosotras, como estudiantes de la media técnica en articulación con el SENATIC, nos hicimos una pregunta contundente: <em>¿Por qué en plena era de la transformación digital seguimos administrando el evento más multitudinario del colegio a punta de hojas de papel y carteleras?</em> Fue así como nació la visión de crear una solución de software hecha por chinquistas y para el Inocencio Chincá."
+      </p>
+    </div>
+
+    <!-- SECCIÓN 3: LA SOLUCIÓN Y LA PROPUESTA DE VENTA -->
+    <div class="chapter">
+      <div class="chapter-heading">3. La Solución Digital y la Propuesta de Venta Institucional</div>
+      <div class="speaker-banner">
+        <span>EXPOSITORA:</span>
+        <span>NIKOL DAYANNA ALVARADO MONTOYA</span>
+      </div>
+
+      <div class="stage-note">
+        💡 Transición: Danna cede la palabra a Nikol con un gesto cordial. Nikol toma el centro del escenario con tono convincente y comercial.
+      </div>
+
+      <p class="speech-paragraph">
+        "Muchas gracias, Danna. Muy buenos días señores del jurado y profesores. Como bien explicó mi compañera, el problema no era la falta de entusiasmo deportivo, sino la ausencia de una herramienta tecnológica adecuada. Nuestra respuesta concreta ante este desafío se llama <strong>Intercursos Chincá</strong>.
+      </p>
+
+      <p class="speech-paragraph">
+        Queremos dejar algo muy en claro desde este momento: este proyecto <strong>no fue pensado únicamente para cumplir con un requisito de grado o una nota académica</strong>. Fue concebido desde el primer día como un <strong>producto de software listo para ser adoptado e implementado formalmente por la rectoría, la coordinación y el departamento de educación física de la Institución Educativa Inocencio Chincá</strong>.
+      </p>
+
+      <p class="speech-paragraph">
+        ¿Por qué nuestra institución debe adquirir y utilizar esta plataforma? Les presento cuatro razones de alto valor institucional:
+      </p>
+
+      <p class="speech-paragraph">
+        <strong>1. Eficiencia y ahorro de tiempo operativo:</strong> Lo que a los docentes de educación física les tomaba semanas de planeación manual, cuadrando cruces de partidos a mano, la plataforma lo resuelve en cuestión de minutos gracias a formularios centralizados y validaciones lógicas.
+      </p>
+
+      <p class="speech-paragraph">
+        <strong>2. Garantía de orden y cero conflictos de espacio:</strong> El sistema tiene codificadas las sedes deportivas oficiales de nuestro colegio: la <em>Cancha Principal</em>, la <em>Cancha Múltiple</em>, la <em>Cancha Cubierta</em> y la <em>Pista Atlética</em>. Esto impide que se programen partidos simultáneos en el mismo espacio físico, garantizando la paz y la sana convivencia escolar.
+      </p>
+
+      <p class="speech-paragraph">
+        <strong>3. Accesibilidad universal y sin barreras:</strong> La plataforma es 100% web y adaptable. Cualquier estudiante o profesor puede consultarla desde cualquier teléfono celular, tablet o computador, sin tener que descargar aplicaciones pesadas que consuman memoria en sus dispositivos.
+      </p>
+
+      <p class="speech-paragraph">
+        <strong>4. Prestigio e innovación para el Inocencio Chincá:</strong> Con esta herramienta, nuestro colegio da un paso al frente en la vanguardia tecnológica frente a otras instituciones educativas de la ciudad, demostrando que en el Chincá formamos estudiantes con competencias para transformar su entorno."
+      </p>
+    </div>
+
+    <!-- SECCIÓN 4: DEMOSTRACIÓN DE LOS MÓDULOS DEL SISTEMA -->
+    <div class="chapter">
+      <div class="chapter-heading">4. Demostración Detallada de los Módulos de la Aplicación</div>
+      <div class="speaker-banner">
+        <span>EXPOSITORA:</span>
+        <span>NIKOL DAYANNA ALVARADO MONTOYA</span>
+      </div>
+
+      <p class="speech-paragraph">
+        "A continuación, les explicaré cómo se estructuró la experiencia de usuario dentro de la plataforma, la cual cuenta con dos módulos especializados diseñados para cada tipo de usuario:
+      </p>
+
+      <p class="speech-paragraph">
+        <strong>Primero, la Vista Visitante (El portal para los estudiantes y la comunidad):</strong><br>
+        Pensamos en la comodidad absoluta del estudiante. Al ingresar, el alumno no requiere usuario ni contraseña para informarse. Cuenta con una barra de <strong>filtros rápidos por grado</strong>, donde con un solo toque (por ejemplo '10°', '11°', '6°', etc.) el sistema filtra automáticamente los encuentros de su salón. También puede filtrar por disciplina deportiva.
+        Cada partido se despliega en una tarjeta gráfica que comunica de forma visual e intuitiva el estado del encuentro mediante códigos de color:
+        <br>• Si está <strong>'Programado'</strong>, muestra con total precisión la fecha, la hora exacta, la cancha asignada y la fase del torneo (si es fase regular, semifinal o final).
+        <br>• Si el partido está <strong>'En Juego'</strong>, aparece destacado para alertar a los estudiantes que el partido se está disputando en ese momento.
+        <br>• Y si está <strong>'Finalizado'</strong>, muestra el marcador oficial aprobado, erradicando para siempre cualquier rumor o alteración de resultados en los pasillos del colegio.
+      </p>
+
+      <p class="speech-paragraph">
+        <strong>Segundo, la Vista Administrador (El centro de control deportivo):</strong><br>
+        Este módulo está diseñado con estrictos controles para los profesores organizadores. Cuenta con tres áreas esenciales:
+        <br>1. <em>Inscripción rápida de equipos:</em> Permite registrar los cursos participantes vinculados al deporte correspondiente, manteniendo un contador dinámico de equipos inscritos.
+        <br>2. <em>Programador de partidos:</em> Un formulario inteligente donde se seleccionan el deporte, los dos equipos contendientes, el lugar oficial, la fecha, hora y fase.
+        <br>3. <em>Panel de control de marcadores y estados en vivo:</em> Durante el partido o al finalizar el mismo, el administrador puede editar los goles o puntos con dos botones sencillos y cambiar el estado del partido a 'Finalizado'. Todo esto se sincroniza al instante en la pantalla de los estudiantes.
+      </p>
+
+      <p class="speech-paragraph">
+        Cubre además 5 disciplinas deportivas esenciales: <strong>Fútbol, Baloncesto, Voleibol, Microfútbol y Atletismo</strong>. Ahora bien, para que una aplicación funcione con esta fluidez y seguridad, se requiere una arquitectura sólida de software. Para explicarles los estándares de ingeniería y código que implementamos, le cedo la palabra a mi compañera María Ignacia Salón."
+      </p>
+    </div>
+
+    <!-- SECCIÓN 5: ARQUITECTURA TÉCNICA Y BASE DE DATOS -->
+    <div class="chapter">
+      <div class="chapter-heading">5. Arquitectura Técnica, Código y Base de Datos Relacional</div>
+      <div class="speaker-banner">
+        <span>EXPOSITORA:</span>
+        <span>MARÍA IGNACIA SALÓN CAMARGO</span>
+      </div>
+
+      <div class="stage-note">
+        💡 Transición: María toma la palabra con seguridad técnica y elocuencia analítica.
+      </div>
+
+      <p class="speech-paragraph">
+        "Muchas gracias, Nikol. Reciban un muy cordial saludo, apreciados jurados y docentes. Entrando en el ámbito de la ingeniería de software y el desarrollo tecnológico, este proyecto fue programado implementando las mejores prácticas y estándares de la industria moderna.
+      </p>
+
+      <p class="speech-paragraph">
+        <strong>1. Frontend con React y TypeScript:</strong><br>
+        En la capa de presentación utilizamos la librería <strong>React</strong> bajo la arquitectura SPA (Single Page Application). Esto significa que la navegación entre la pantalla de Inicio, la Vista Visitante y el Panel de Administrador se realiza de forma instantánea, sin recargas molestas de navegador, ofreciendo una experiencia similar a la de una aplicación nativa.
+        Además, implementamos <strong>TypeScript</strong>. A diferencia del JavaScript tradicional, TypeScript nos proporciona un sistema de <strong>tipado estricto en tiempo de compilación</strong>. Mediante interfaces y tipos definidos como <code>Partido</code>, <code>Equipo</code>, <code>SportKey</code> y <code>MatchStatus</code>, aseguramos que ningún dato viaje incompleto o corrupto entre componentes, blindando la aplicación contra errores de ejecución (los llamados 'bugs' o excepciones de pantalla en blanco).
+      </p>
+
+      <p class="speech-paragraph">
+        <strong>2. Diseño y Estética con Tailwind CSS:</strong><br>
+        El diseño visual no es genérico ni improvisado; fue confeccionado respetando los colores institucionales del Inocencio Chincá: el vinotinto profundo, el rojo carmesí, acentos dorados y contrastes limpios. Con Tailwind logramos una interfaz modular, ligera y 100% responsiva con una jerarquía tipográfica pensada para la lectura ágil en dispositivos móviles.
+      </p>
+
+      <p class="speech-paragraph">
+        <strong>3. Persistencia y Base de Datos Relacional (PostgreSQL / Supabase):</strong><br>
+        Uno de los puntos más relevantes que evaluará el jurado es qué sucede con la información cuando se apaga el computador o se cierra la pestaña. En nuestro sistema los datos <strong>nunca se pierden</strong>.
+        Estructuramos un modelo relacional en la nube conectado a <strong>PostgreSQL a través de Supabase</strong>, compuesto por cuatro entidades fuertemente normalizadas:
+        <br>• Tabla <code>deportes</code>: Almacena el catálogo de disciplinas, sus claves identificadoras e íconos.
+        <br>• Tabla <code>equipos</code>: Guarda el listado de los grados inscritos, vinculados mediante una clave foránea (Foreign Key) a su deporte respectivo.
+        <br>• Tabla <code>lugares</code>: Almacena las canchas oficiales del colegio y sus capacidades.
+        <br>• Tabla <code>partidos</code>: Es el núcleo del fixture, donde se almacenan las relaciones entre el equipo local, el equipo visitante, la fecha, la hora, el marcador y el estado.
+      </p>
+
+      <p class="speech-paragraph">
+        Esta integridad referencial impide que se programen partidos con equipos inexistentes o que se generen registros huérfanos. Adicionalmente, el sistema cuenta con manejo de estado centralizado (React Context API) y persistencia en almacenamiento local para garantizar que la plataforma responda con total inmediatez."
+      </p>
+    </div>
+
+    <!-- SECCIÓN 6: IMPACTO SOCIAL, CONCLUSIÓN Y PREGUNTAS -->
+    <div class="chapter">
+      <div class="chapter-heading">6. Impacto Institucional, Cierre y Agradecimientos</div>
+      <div class="speaker-banner">
+        <span>EXPOSITORA:</span>
+        <span>MARÍA IGNACIA SALÓN CAMARGO (Y CIERRE GRUPAL)</span>
+      </div>
+
+      <p class="speech-paragraph">
+        "Para concluir nuestra exposición, queremos resaltar el impacto que <strong>Intercursos Chincá</strong> aportará a nuestra comunidad educativa:
+      </p>
+
+      <p class="speech-paragraph">
+        • <strong>Impacto Convivencial:</strong> El deporte es una herramienta pedagógica de formación en valores. Cuando un torneo es transparente, público y organizado, se disminuyen los conflictos y se fortalece el compañerismo y el sentido de pertenencia entre las diferentes jornadas y grados.
+        <br>• <strong>Impacto Ecológico y Económico:</strong> Al digitalizar por completo las inscripciones y el seguimiento, la institución ahorra cientos de fotocopias y resmas de papel por cada campeonato, contribuyendo al cuidado del medio ambiente.
+        <br>• <strong>Impacto Formativo SENATIC:</strong> Este proyecto es el testimonio vivo de que la articulación con SENATIC en la I.E. Inocencio Chincá no se queda en teoría; produce desarrolladoras de software capacitadas para diseñar, programar y desplegar soluciones de impacto real para la sociedad.
+      </p>
+
+      <p class="speech-paragraph">
+        Por todo lo anterior, afirmamos con certeza que <strong>Intercursos Chincá</strong> está 100% probado, listo y a disposición del colegio para ser utilizado en el campeonato de este año lectivo.
+      </p>
+
+      <p class="speech-paragraph">
+        Agradecemos de corazón a nuestras familias por su constante apoyo, a los directivos y docentes del Inocencio Chincá por abrirnos las puertas, y a nuestros instructores de SENATIC por brindarnos las herramientas técnicas para alcanzar esta meta.
+      </p>
+
+      <p class="speech-paragraph">
+        De esta manera damos por concluida nuestra intervención oral, y con el mayor de los gustos abrimos el espacio para las observaciones y preguntas que los distinguidos miembros del jurado deseen formularnos. <strong>¡Muchísimas gracias a todos!</strong>"
+      </p>
+
+      <div class="stage-note">
+        💡 Pauta de cierre: Las tres integrantes se alinean frente a los evaluadores, sonríen y realizan una reverencia de agradecimiento al unísono.
+      </div>
+    </div>
+
+    <!-- PREPARACIÓN DE PREGUNTAS CLAVE DEL JURADO -->
+    <div class="qa-box">
+      <h3>🎯 Banco de Respuestas Maestras para el Jurado</h3>
+
+      <div class="qa-item">
+        <strong>Pregunta 1: ¿Qué medidas de seguridad implementaron para que un estudiante no modifique los marcadores o borre partidos?</strong>
+        <p><em>Respuesta (Nikol Alvarado):</em> "El sistema tiene una separación lógica estricta de privilegios. La Vista Visitante está configurada como una interfaz de solo lectura ('Read Only'), lo que significa que el estudiante no tiene botones ni rutas de alteración de base de datos. Solo el personal autorizado con acceso al módulo de administración cuenta con las funciones de escritura y actualización de partidos."</p>
+      </div>
+
+      <div class="qa-item">
+        <strong>Pregunta 2: ¿Qué sucede si el colegio tiene fallas en la red de internet durante el día del torneo?</strong>
+        <p><em>Respuesta (María Salón):</em> "Anticipamos ese escenario implementando almacenamiento local sincronizado en el navegador (Local Cache). Si la conexión a internet es inestable, la plataforma mantiene en memoria la programación ya cargada, permitiendo consultar los partidos de la jornada sin interrupciones."</p>
+      </div>
+
+      <div class="qa-item">
+        <strong>Pregunta 3: ¿Qué tan escalable es el software si el próximo año el colegio decide incluir deportes como ajedrez o tenis de mesa?</strong>
+        <p><em>Respuesta (Danna Uribe):</em> "El software fue diseñado de forma completamente modular y escalable. Gracias a que la base de datos está normalizada con la tabla `deportes`, registrar una nueva disciplina solo requiere agregar el nuevo registro con su ícono y lugar predeterminado, sin necesidad de reescribir la lógica ni el código central de la aplicación."</p>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

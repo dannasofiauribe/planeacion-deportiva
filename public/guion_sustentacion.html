@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guion de Sustentación Oficial | Intercursos Chincá - Grado 1102</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:ital,wght@0,400;0,600;1,400&display=swap');
+
+    :root {
+      --primary: #8b0000;
+      --primary-dark: #500000;
+      --gold: #d4af37;
+      --dark: #1a1a1a;
+      --gray-light: #f4f6f8;
+      --gray-border: #e2e8f0;
+      --danna-color: #0d6efd;
+      --nikol-color: #198754;
+      --maria-color: #6f42c1;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      color: #2d3748;
+      background: #f8fafc;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .no-print-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #111827;
+      color: white;
+      padding: 14px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .btn-pdf {
+      background: #dc2626;
+      color: white;
+      font-weight: 700;
+      font-size: 15px;
+      padding: 10px 22px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 6px rgba(220,38,38,0.4);
+    }
+
+    .btn-pdf:hover {
+      background: #b91c1c;
+      transform: translateY(-1px);
+    }
+
+    .page-container {
+      max-width: 860px;
+      margin: 30px auto;
+      background: white;
+      padding: 50px 60px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+      border-radius: 8px;
+    }
+
+    .header-doc {
+      border-bottom: 3px solid var(--primary);
+      padding-bottom: 20px;
+      margin-bottom: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header-titles h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 24px;
+      color: var(--primary);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .header-titles h2 {
+      font-size: 14px;
+      color: #64748b;
+      font-weight: 600;
+      margin-top: 4px;
+    }
+
+    .badge-senatic {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      color: #991b1b;
+      font-weight: 700;
+      font-size: 12px;
+      padding: 6px 12px;
+      border-radius: 6px;
+      text-align: right;
+    }
+
+    .info-card {
+      background: var(--gray-light);
+      border-radius: 8px;
+      padding: 18px 22px;
+      margin-bottom: 30px;
+      border-left: 4px solid var(--gold);
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+
+    .info-item span.label {
+      display: block;
+      font-size: 11px;
+      text-transform: uppercase;
+      color: #64748b;
+      font-weight: 700;
+    }
+
+    .info-item span.val {
+      font-size: 14px;
+      font-weight: 600;
+      color: #1e293b;
+    }
+
+    .act-section {
+      margin-bottom: 35px;
+      page-break-inside: avoid;
+    }
+
+    .act-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 17px;
+      font-weight: 800;
+      padding: 10px 16px;
+      background: #f1f5f9;
+      border-radius: 6px;
+      color: #0f172a;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      border-left: 5px solid;
+    }
+
+    .act-danna { border-left-color: var(--danna-color); }
+    .act-nikol { border-left-color: var(--nikol-color); }
+    .act-maria { border-left-color: var(--maria-color); }
+    .act-all { border-left-color: var(--gold); }
+
+    .speaker-tag {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-weight: 700;
+      color: white;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .tag-danna { background: var(--danna-color); }
+    .tag-nikol { background: var(--nikol-color); }
+    .tag-maria { background: var(--maria-color); }
+    .tag-all { background: #b45309; }
+
+    .speech-box {
+      background: white;
+      border: 1px solid var(--gray-border);
+      border-radius: 8px;
+      padding: 18px 20px;
+      margin-bottom: 16px;
+    }
+
+    .slide-ref {
+      font-size: 12px;
+      font-weight: 700;
+      color: #b91c1c;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .dialogue {
+      font-size: 14.5px;
+      line-height: 1.7;
+      color: #1e293b;
+      margin-bottom: 10px;
+    }
+
+    .dialogue strong {
+      color: #000;
+    }
+
+    .cue {
+      background: #fffbeb;
+      border-left: 3px solid #f59e0b;
+      padding: 6px 12px;
+      font-size: 12.5px;
+      color: #92400e;
+      font-style: italic;
+      border-radius: 0 4px 4px 0;
+    }
+
+    .tips-box {
+      margin-top: 30px;
+      padding: 20px;
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 8px;
+      page-break-inside: avoid;
+    }
+
+    .tips-box h3 {
+      font-size: 15px;
+      color: #1e40af;
+      font-family: 'Montserrat', sans-serif;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+
+    .tips-box ul {
+      padding-left: 20px;
+      font-size: 13px;
+      color: #1e3a8a;
+    }
+
+    .tips-box li {
+      margin-bottom: 6px;
+    }
+
+    @media print {
+      body {
+        background: white;
+        font-size: 12pt;
+      }
+      .no-print-bar {
+        display: none !important;
+      }
+      .page-container {
+        max-width: 100%;
+        margin: 0;
+        padding: 0;
+        box-shadow: none;
+      }
+      .act-section {
+        page-break-inside: auto;
+      }
+      .speech-box {
+        page-break-inside: avoid;
+      }
+      @page {
+        margin: 15mm 15mm 15mm 15mm;
+        size: letter portrait;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="no-print-bar">
+    <div>
+      <strong style="font-size: 16px;">📄 Guion Oficial de Sustentación Oral</strong>
+      <span style="opacity: 0.8; margin-left: 10px; font-size: 13px;">I.E. Inocencio Chincá • SENATIC 1102</span>
+    </div>
+    <button class="btn-pdf" onclick="window.print()">
+      🖨️ Descargar en PDF / Imprimir Guion
+    </button>
+  </div>
+
+  <div class="page-container">
+
+    <div class="header-doc">
+      <div class="header-titles">
+        <h1>Guion Oficial de Sustentación</h1>
+        <h2>Proyecto: Sistema de Planeación Deportiva Escolar "Intercursos Chincá"</h2>
+      </div>
+      <div class="badge-senatic">
+        PROYECTO SENATIC<br>
+        <strong>I.E. INOCENCIO CHINCÁ</strong>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-item">
+        <span class="label">Grado</span>
+        <span class="val">1102</span>
+      </div>
+      <div class="info-item">
+        <span class="label">Integrantes del Equipo</span>
+        <span class="val">Danna Sofía Uribe Higuera<br>Nikol Dayanna Alvarado Montoya<br>María Ignacia Salón Camargo</span>
+      </div>
+      <div class="info-item">
+        <span class="label">Tiempo Estimado</span>
+        <span class="val">7 a 10 minutos (incluye demo)</span>
+      </div>
+      <div class="info-item">
+        <span class="label">Objetivo Principal</span>
+        <span class="val">Vender y defender la plataforma como solución real e institucional</span>
+      </div>
+    </div>
+
+    <!-- PARTE 1: DANNA -->
+    <div class="act-section">
+      <div class="act-title act-danna">
+        <span>PARTE 1: INTRODUCCIÓN Y PROBLEMÁTICA REAL</span>
+        <span class="speaker-tag tag-danna">Danna Sofía Uribe Higuera</span>
+      </div>
+
+      <!-- Diapositiva 1 -->
+      <div class="speech-box">
+        <div class="slide-ref">📌 Mostrando Diapositiva 1: Portada Oficial</div>
+        <div class="dialogue">
+          "Muy buenos días a todos los jurados, docentes y compañeros presentes. Mi nombre es <strong>Danna Sofía Uribe Higuera</strong>, y junto con mis compañeras <strong>Nikol Dayanna Alvarado Montoya</strong> y <strong>María Ignacia Salón Camargo</strong>, estudiantes del grado <strong>1102</strong>, venimos a presentarles nuestro proyecto del programa <strong>SENATIC</strong> en articulación con la Institución Educativa Inocencio Chincá: <em>Intercursos Chincá — Automatizando la pasión, organizando el juego</em>."
+        </div>
+        <div class="cue">💡 Pauta de acción: Saludo con postura firme, mirada a los jurados y tono seguro y entusiasta.</div>
+      </div>
+
+      <!-- Diapositiva 2 -->
+      <div class="speech-box">
+        <div class="slide-ref">📌 Mostrando Diapositiva 2: Planteamiento del Problema</div>
+        <div class="dialogue">
+          "Para nadie en nuestro colegio es un secreto lo que sucede cada vez que inician los intercursos: la organización dependía enteramente de <strong>hojas de papel y planillas físicas</strong>. Esto provocaba que las planillas se extraviaran o se dañaran, generaba constantes <strong>cruces de horarios</strong> donde dos grados llegaban al tiempo a disputar la misma cancha, y los estudiantes pasaban el recreo completo persiguiendo a los profesores de educación física para saber si jugaban o no. Había reclamos sobre los marcadores y desmotivación en los alumnos. Nosotras nos preguntamos: <em>¿por qué en plena era digital seguimos organizando el evento deportivo más importante del colegio en papel?</em>"
+        </div>
+        <div class="cue">💡 Pauta de acción: Enfatizar el dolor del problema escolar. Los jurados deben asentir reconociendo la problemática real.</div>
+      </div>
+
+      <!-- Diapositiva 3 -->
+      <div class="speech-box">
+        <div class="slide-ref">📌 Mostrando Diapositiva 3: Nuestra Solución Digital</div>
+        <div class="dialogue">
+          "Frente a este problema desarrollamos <strong>Intercursos Chincá</strong>: una plataforma web institucional, moderna y accesible desde cualquier celular o computador. Creamos dos entornos totalmente diseñados para el colegio: la <strong>Vista Visitante</strong>, para que cualquier estudiante o docente consulte partidos y resultados al instante, y la <strong>Vista Administrador</strong>, para que el comité organice inscripciones y partidos sin errores. Abarcamos las 5 disciplinas oficiales del colegio: Fútbol, Baloncesto, Voleibol, Microfútbol y Atletismo. A continuación, mi compañera Nikol Dayanna les demostrará la plataforma y su valor como producto."
+        </div>
+        <div class="cue">💡 Pauta de acción: Ceder la palabra con elegancia a Nikol con un gesto cordial.</div>
+      </div>
+    </div>
+
+    <!-- PARTE 2: NIKOL -->
+    <div class="act-section">
+      <div class="act-title act-nikol">
+        <span>PARTE 2: DEMOSTRACIÓN EN VIVO Y VENTA DEL PRODUCTO</span>
+        <span class="speaker-tag tag-nikol">Nikol Dayanna Alvarado Montoya</span>
+      </div>
+
+      <!-- Diapositiva 4 -->
+      <div class="speech-box">
+        <div class="slide-ref">📌 Mostrando Diapositiva 4: La Propuesta de Venta (Valor Agregado)</div>
+        <div class="dialogue">
+          "Muchas gracias, Danna. Buenos días a todos. Nuestro proyecto no es solo un ejercicio de clase; es una <strong>solución lista para ser adoptada por la institución</strong>. ¿Por qué comprar o implementar esta plataforma? Primero, por <strong>ahorro de tiempo y recursos</strong>: automatizamos lo que antes tomaba horas. Segundo, por <strong>cero conflictos</strong>: el sistema valida automáticamente la disponibilidad de cada cancha. Y tercero, por <strong>identidad y orgullo institucional</strong>: proyectamos al Inocencio Chincá como un colegio líder en tecnología escolar."
+        </div>
+        <div class="cue">💡 Pauta de acción: Hablar con mentalidad comercial y de impacto. Vender la conveniencia para directivos y profesores.</div>
+      </div>
+
+      <!-- Diapositiva 5 -->
+      <div class="speech-box">
+        <div class="slide-ref">📌 Mostrando Diapositiva 5: Demostración — Vista Visitante (Estudiantes)</div>
+        <div class="dialogue">
+          "Veamos cómo funciona para un estudiante. Al ingresar a la <em>Vista Visitante</em>, el alumno no necesita usuario ni contraseña: puede filtrar en un clic por su grado —por ejemplo 10° o 11°— o seleccionar el deporte que le interesa. El sistema le muestra en tarjetas visuales si el partido está <strong>Programado</strong> con su cancha y hora, si está <strong>En Juego</strong> en este preciso momento, o si ya está <strong>Finalizado</strong> con el marcador oficial. Esto erradica por completo los rumores y la desinformación en los pasillos."
+        </div>
+        <div class="cue">💡 Pauta de acción: Si tienen la app abierta, señalar en pantalla los filtros y estados con dinamismo.</div>
+      </div>
+
+      <!-- Diapositiva 6 -->
+      <div class="speech-box">
+        <div class="slide-ref">📌 Mostrando Diapositiva 6: Demostración — Vista Administrador (Control Total)</div>
+        <div class="dialogue">
+          "Por otro lado, para los profesores y organizadores tenemos el <em>Panel de Control Deportivo</em>. Aquí inscribimos rápidamente los equipos por grado y deporte. En la programación, el sistema cuenta con reglas de validación: asigna las canchas oficiales del colegio (Cancha Principal, Múltiple, Cubierta o Pista Atlética) garantizando que no existan cruces. Además, permite actualizar los marcadores en vivo durante el partido con solo un clic, reflejándose inmediatamente a toda la institución. Ahora, mi compañera María Ignacia les explicará cómo construimos esto a nivel de software y base de datos."
+        </div>
+        <div class="cue">💡 Pauta de acción: Dar paso a María con tono de orgullo por el trabajo técnico realizado.</div>
+      </div>
+    </div>
+
+    <!-- PARTE 3: MARÍA -->
+    <div class="act-section">
+      <div class="act-title act-maria">
+        <span>PARTE 3: ARQUITECTURA TÉCNICA, CÓDIGO E IMPACTO</span>
+        <span class="speaker-tag tag-maria">María Ignacia Salón Camargo</span>
+      </div>
+
+      <!-- Diapositiva 7 -->
+      <div class="speech-box">
+        <div class="slide-ref">📌 Mostrando Diapositiva 7: Arquitectura de Software y Código Limpio</div>
+        <div class="dialogue">
+          "Muchas gracias, Nikol. Saludos a los presentes. A nivel técnico, la plataforma fue construida con estándares profesionales de la industria web moderna. En el Frontend utilizamos <strong>React con TypeScript</strong>, lo cual nos brinda un tipado estricto para evitar errores en tiempo de ejecución, una navegación fluida tipo SPA sin recargas molestas de página, y una estructura de componentes modulares donde cada vista está desacoplada y limpia."
+        </div>
+        <div class="cue">💡 Pauta de acción: Demostrar dominio de los términos técnicos aprendidos en SENATIC.</div>
+      </div>
+
+      <!-- Diapositiva 8 -->
+      <div class="speech-box">
+        <div class="slide-ref">📌 Mostrando Diapositiva 8: Base de Datos Relacional y Supabase</div>
+        <div class="dialogue">
+          "Para garantizar que los datos nunca se pierdan y permanezcan seguros, conectamos una base de datos relacional <strong>PostgreSQL a través de Supabase</strong>. Diseñamos 4 tablas normalizadas: <code>deportes</code>, <code>equipos</code>, <code>lugares</code> y <code>partidos</code>, conectadas mediante claves foráneas e integridad referencial. Esto asegura que si se programa un partido entre dos grados, el sistema verifique que los equipos y el lugar existan previamente en la base de datos."
+        </div>
+        <div class="cue">💡 Pauta de acción: Resaltar que no son datos ficticios, sino una base de datos real con persistencia.</div>
+      </div>
+
+      <!-- Diapositiva 9 -->
+      <div class="speech-box">
+        <div class="slide-ref">📌 Mostrando Diapositiva 9: Impacto en la Comunidad Chinquista</div>
+        <div class="dialogue">
+          "El impacto de este proyecto trasciende lo técnico: fomenta la sana convivencia y el espíritu deportivo en la institución, elimina el gasto innecesario de papel apoyando el cuidado del medio ambiente, y demuestra la capacidad de las estudiantes de la I.E. Inocencio Chincá para proponer y construir soluciones digitales de alto impacto para nuestra propia comunidad."
+        </div>
+        <div class="cue">💡 Pauta de acción: Tono inspirador y de liderazgo estudiantil.</div>
+      </div>
+
+      <!-- Diapositiva 10 -->
+      <div class="speech-box">
+        <div class="slide-ref">📌 Mostrando Diapositiva 10: Conclusión y Cierre</div>
+        <div class="dialogue">
+          "En conclusión: <strong>Intercursos Chincá</strong> está listo para ser implementado en el próximo campeonato de la institución. Agradecemos a nuestros profesores del Inocencio Chincá y al programa SENATIC por las herramientas brindadas. Quedamos a disposición de los jurados para cualquier pregunta técnica o demostración en vivo. ¡Muchas gracias!"
+        </div>
+        <div class="cue">💡 Pauta de acción: Las 3 integrantes se ponen de pie al frente, hacen una reverencia o saludo conjunto de agradecimiento.</div>
+      </div>
+    </div>
+
+    <!-- PREGUNTAS TÍPICAS DE LOS JURADOS -->
+    <div class="tips-box">
+      <h3>🎯 Posibles Preguntas del Jurado y Cómo Responderlas:</h3>
+      <ul>
+        <li><strong>¿Qué pasa si se va el internet en el colegio?</strong> — <em>Respuesta (María):</em> "La aplicación utiliza almacenamiento local en caché y sincronización en tiempo real, permitiendo consultar los datos cargados previamente."</li>
+        <li><strong>¿Cómo evitan que un estudiante modifique los partidos?</strong> — <em>Respuesta (Nikol):</em> "La Vista Visitante es exclusivamente de consulta y lectura. Solo el comité organizador tiene acceso a los controles de edición y programación."</li>
+        <li><strong>¿Se pueden agregar más deportes en el futuro?</strong> — <em>Respuesta (Danna):</em> "Sí, la base de datos y la arquitectura están diseñadas de forma modular, lo que permite añadir deportes como ajedrez o tenis de mesa sin reprogramar el sistema."</li>
+      </ul>
+    </div>
+
+  </div>
+
+</body>
+</html>

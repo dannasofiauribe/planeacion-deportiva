@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diapositivas Oficiales para PDF | Intercursos Chincá - Grado 1102</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Open+Sans:wght@400;600;700&display=swap');
+
+    :root {
+      --bg-dark: #120306;
+      --bg-card: #20060b;
+      --primary: #c9182b;
+      --primary-light: #ff4d5a;
+      --gold: #f59e0b;
+      --gold-light: #fbbf24;
+      --text-white: #ffffff;
+      --text-muted: #cbd5e1;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #0b0f19;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-bottom: 50px;
+    }
+
+    .top-actions-bar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      width: 100%;
+      background: #1e293b;
+      padding: 14px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    }
+
+    .btn-pdf {
+      background: linear-gradient(135deg, #e11d48, #be123c);
+      color: white;
+      font-weight: 800;
+      font-size: 16px;
+      padding: 12px 28px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 15px rgba(225,29,72,0.4);
+    }
+
+    .btn-pdf:hover {
+      background: linear-gradient(135deg, #f43f5e, #e11d48);
+      transform: scale(1.02);
+    }
+
+    .slide {
+      width: 960px;
+      height: 540px; /* Exact 16:9 ratio */
+      margin: 30px auto;
+      background: radial-gradient(circle at 50% 20%, #400710 0%, #170205 100%);
+      border: 2px solid rgba(245, 158, 11, 0.4);
+      border-radius: 12px;
+      padding: 40px 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+      page-break-after: always;
+      page-break-inside: avoid;
+    }
+
+    .slide::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(201, 24, 43, 0.15), transparent 70%);
+      pointer-events: none;
+    }
+
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid rgba(255,255,255,0.1);
+      padding-bottom: 12px;
+    }
+
+    .slide-badge {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+
+    .slide-number {
+      font-size: 13px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .slide-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin: 20px 0;
+    }
+
+    .slide-title {
+      font-size: 28px;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    }
+
+    .slide-subtitle {
+      font-size: 15px;
+      color: var(--gold-light);
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .slide-footer {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: rgba(255,255,255,0.6);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Grid cards inside slides */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+    }
+
+    .card-box {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 8px;
+      padding: 16px 20px;
+    }
+
+    .card-box h4 {
+      color: var(--gold-light);
+      font-size: 15px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-box p, .card-box ul {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .card-box ul {
+      padding-left: 18px;
+    }
+
+    .card-box li {
+      margin-bottom: 6px;
+    }
+
+    /* Specific to cover */
+    .cover-content {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cover-logo {
+      width: 90px;
+      height: 90px;
+      object-fit: contain;
+      margin-bottom: 12px;
+      filter: drop-shadow(0 0 15px rgba(245, 158, 11, 0.6));
+    }
+
+    .cover-title {
+      font-size: 34px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      background: linear-gradient(180deg, #fff 0%, #fecdd3 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 6px;
+    }
+
+    .cover-slogan {
+      font-size: 16px;
+      font-style: italic;
+      color: var(--gold-light);
+      margin-bottom: 22px;
+      font-weight: 600;
+    }
+
+    .team-badge {
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      border-radius: 8px;
+      padding: 12px 30px;
+      display: inline-block;
+    }
+
+    .team-badge h5 {
+      color: var(--gold-light);
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .team-badge p {
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    @media print {
+      body {
+        background: transparent !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+      .top-actions-bar {
+        display: none !important;
+      }
+      .slide {
+        width: 100vw !important;
+        height: 100vh !important;
+        max-width: 100vw !important;
+        max-height: 100vh !important;
+        margin: 0 !important;
+        border-radius: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+        page-break-after: always !important;
+        page-break-inside: avoid !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      @page {
+        size: landscape;
+        margin: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-actions-bar">
+    <div>
+      <strong style="font-size: 16px; color: #fff;">📊 Diapositivas Oficiales Intercursos Chincá</strong>
+      <span style="color: #94a3b8; font-size: 13px; margin-left: 12px;">Grado 1102 • Danna, Nikol y María</span>
+    </div>
+    <button class="btn-pdf" onclick="window.print()">
+      🖨️ Descargar Diapositivas en PDF (Guardar como PDF)
+    </button>
+  </div>
+
+  <!-- SLIDE 1 -->
+  <section class="slide">
+    <div class="slide-header">
+      <span class="slide-badge">PROYECTO SENATIC • I.E. INOCENCIO CHINCÁ</span>
+      <span class="slide-number">01 / 10</span>
+    </div>
+    <div class="slide-body cover-content">
+      <img src="imagenes/logo.png" alt="Logo Intercursos Chincá" class="cover-logo" onerror="this.style.display='none'">
+      <h1 class="cover-title">INTERCURSOS CHINCÁ</h1>
+      <p class="cover-slogan">"Automatizando la pasión, organizando el juego."</p>
+      <div class="team-badge">
+        <h5>EQUIPO DESARROLLADOR • GRADO 1102</h5>
+        <p>Danna Sofía Uribe Higuera • Nikol Dayanna Alvarado Montoya • María Ignacia Salón Camargo</p>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>Sistema Web de Planeación Deportiva Escolar</span>
+      <span>Sustentación de Proyecto 2026</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 2 -->
+  <section class="slide">
+    <div class="slide-header">
+      <span class="slide-badge">DIAGNÓSTICO INSTITUCIONAL</span>
+      <span class="slide-number">02 / 10</span>
+    </div>
+    <div class="slide-body">
+      <h2 class="slide-title">Planteamiento del Problema</h2>
+      <p class="slide-subtitle">¿Qué ocurría en la organización tradicional de los torneos del colegio?</p>
+      <div class="grid-2">
+        <div class="card-box">
+          <h4>📄 Dependencia del Papel Físico</h4>
+          <p>Planillas impresas que se traspapelaban, deterioraban o manchaban durante los descansos, perdiendo el registro de inscripciones y resultados.</p>
+        </div>
+        <div class="card-box">
+          <h4>⚔️ Conflicto de Canchas y Horarios</h4>
+          <p>Múltiples grados llegaban al mismo tiempo a la misma cancha por falta de un cronograma centralizado e inteligente.</p>
+        </div>
+        <div class="card-box">
+          <h4>❓ Desinformación Estudiantil</h4>
+          <p>Los alumnos debían buscar al docente de educación física en los pasillos para saber contra quién jugaban y a qué hora.</p>
+        </div>
+        <div class="card-box">
+          <h4>⚠️ Reclamos y Falta de Transparencia</h4>
+          <p>Dudas constantes en los marcadores oficiales y en la tabla de clasificados a las siguientes rondas eliminatorias.</p>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>I.E. Inocencio Chincá</span>
+      <span>Expone: Danna Sofía Uribe</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 3 -->
+  <section class="slide">
+    <div class="slide-header">
+      <span class="slide-badge">LA PROPUESTA DIGITAL</span>
+      <span class="slide-number">03 / 10</span>
+    </div>
+    <div class="slide-body">
+      <h2 class="slide-title">Nuestra Solución: Intercursos Chincá</h2>
+      <p class="slide-subtitle">Una plataforma web moderna, rápida y centralizada con roles diferenciados.</p>
+      <div class="grid-3">
+        <div class="card-box">
+          <h4>👁️ Vista Visitante</h4>
+          <p>Acceso abierto e inmediato para estudiantes y profesores. Búsqueda por grado, disciplina deportiva y estado de los partidos en vivo.</p>
+        </div>
+        <div class="card-box">
+          <h4>⚙️ Vista Administrador</h4>
+          <p>Panel seguro para el comité deportivo: inscripción de equipos, programación con validación de canchas y registro de marcadores oficiales.</p>
+        </div>
+        <div class="card-box">
+          <h4>🏆 5 Disciplinas Escolares</h4>
+          <p>Cobertura integral para Fútbol, Baloncesto, Voleibol, Microfútbol y Atletismo con reglas y canchas asignadas a cada deporte.</p>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>I.E. Inocencio Chincá</span>
+      <span>Expone: Danna Sofía Uribe</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 4 -->
+  <section class="slide">
+    <div class="slide-header">
+      <span class="slide-badge">VALOR INSTITUCIONAL</span>
+      <span class="slide-number">04 / 10</span>
+    </div>
+    <div class="slide-body">
+      <h2 class="slide-title">Propuesta de Venta: ¿Por qué adoptarlo?</h2>
+      <p class="slide-subtitle">Beneficios inmediatos y tangibles para directivos, docentes y alumnos.</p>
+      <div class="grid-2">
+        <div class="card-box">
+          <h4>⏱️ Reducción del 90% en Tiempo de Gestión</h4>
+          <p>Organizar el campeonato toma minutos en lugar de semanas de planeación manual en hojas de cálculo o carteleras.</p>
+        </div>
+        <div class="card-box">
+          <h4>🚫 Cero Cruces de Canchas</h4>
+          <p>El sistema valida las 4 sedes deportivas del colegio: Cancha Principal, Cancha Múltiple, Cancha Cubierta y Pista Atlética.</p>
+        </div>
+        <div class="card-box">
+          <h4>📱 Accesible desde Cualquier Dispositivo</h4>
+          <p>100% web y responsive. Los estudiantes lo consultan desde su celular sin necesidad de descargar ninguna app pesada.</p>
+        </div>
+        <div class="card-box">
+          <h4>🌟 Liderazgo Tecnológico e Identidad</h4>
+          <p>Posiciona al Inocencio Chincá como una institución educativa moderna que impulsa el talento de sus estudiantes de media técnica.</p>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>I.E. Inocencio Chincá</span>
+      <span>Expone: Nikol Dayanna Alvarado</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 5 -->
+  <section class="slide">
+    <div class="slide-header">
+      <span class="slide-badge">EXPERIENCIA DE USUARIO</span>
+      <span class="slide-number">05 / 10</span>
+    </div>
+    <div class="slide-body">
+      <h2 class="slide-title">Módulo Visitante: La Voz del Estudiante</h2>
+      <p class="slide-subtitle">Diseñado para una consulta intuitiva, ágil y atractiva.</p>
+      <div class="grid-3">
+        <div class="card-box">
+          <h4>🔍 Filtros Rápidos</h4>
+          <p>Botones de atajo por grado (10°, 11°, 6°, 7°, etc.) para encontrar los compromisos del salón en menos de 2 segundos.</p>
+        </div>
+        <div class="card-box">
+          <h4>🚦 Estados en Vivo</h4>
+          <p>Diferenciación con colores y etiquetas: <strong>Programado</strong> (hora/cancha), <strong>En Juego</strong> (en disputa) y <strong>Finalizado</strong>.</p>
+        </div>
+        <div class="card-box">
+          <h4>📊 Marcadores Oficiales</h4>
+          <p>Visualización clara y fidedigna de los resultados aprobados por el comité de arbitraje escolar.</p>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>I.E. Inocencio Chincá</span>
+      <span>Expone: Nikol Dayanna Alvarado</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 6 -->
+  <section class="slide">
+    <div class="slide-header">
+      <span class="slide-badge">GESTIÓN Y CONTROL</span>
+      <span class="slide-number">06 / 10</span>
+    </div>
+    <div class="slide-body">
+      <h2 class="slide-title">Módulo Administrador: Control Total</h2>
+      <p class="slide-subtitle">La herramienta definitiva para los profesores y organizadores del torneo.</p>
+      <div class="grid-3">
+        <div class="card-box">
+          <h4>👥 Inscripción de Equipos</h4>
+          <p>Registro ordenado por grado y deporte con contador dinámico de equipos participantes.</p>
+        </div>
+        <div class="card-box">
+          <h4>📅 Programación Segura</h4>
+          <p>Formulario con selección de fecha, hora, fase del torneo y asignación estricta de lugar oficial.</p>
+        </div>
+        <div class="card-box">
+          <h4>⚡ Actualización en Vivo</h4>
+          <p>Modificación ágil de marcadores y cambio de estado a Finalizado con reflejo automático a los visitantes.</p>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>I.E. Inocencio Chincá</span>
+      <span>Expone: Nikol Dayanna Alvarado</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 7 -->
+  <section class="slide">
+    <div class="slide-header">
+      <span class="slide-badge">INGENIERÍA DE SOFTWARE</span>
+      <span class="slide-number">07 / 10</span>
+    </div>
+    <div class="slide-body">
+      <h2 class="slide-title">Arquitectura y Estándares de Código</h2>
+      <p class="slide-subtitle">Desarrollo profesional con tecnologías líderes en la industria.</p>
+      <div class="grid-3">
+        <div class="card-box">
+          <h4>⚛️ React + TypeScript</h4>
+          <p>Tipado estricto, detección temprana de errores y renderizado reactivo ultrarrápido sin recargas de página (Single Page App).</p>
+        </div>
+        <div class="card-box">
+          <h4>🎨 Tailwind CSS Modular</h4>
+          <p>Diseño estético con la identidad chinquista (rojo carmesí, dorado y negro) adaptado a móviles y pantallas grandes.</p>
+        </div>
+        <div class="card-box">
+          <h4>🧩 Componentes Desacoplados</h4>
+          <p>Estructura limpia con separación estricta: <code>AdminView</code>, <code>VisitanteView</code>, <code>InicioView</code> y Context API.</p>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>I.E. Inocencio Chincá</span>
+      <span>Expone: María Ignacia Salón</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 8 -->
+  <section class="slide">
+    <div class="slide-header">
+      <span class="slide-badge">PERSISTENCIA DE DATOS</span>
+      <span class="slide-number">08 / 10</span>
+    </div>
+    <div class="slide-body">
+      <h2 class="slide-title">Base de Datos Relacional (PostgreSQL / Supabase)</h2>
+      <p class="slide-subtitle">Esquema robusto con integridad referencial y seguridad de datos.</p>
+      <div class="grid-2">
+        <div class="card-box">
+          <h4>🗄️ Tablas Normalizadas</h4>
+          <ul>
+            <li><code>deportes</code>: Catálogo oficial (fútbol, baloncesto, voleibol, microfútbol, atletismo).</li>
+            <li><code>equipos</code>: Grados inscritos vinculados por clave foránea al deporte.</li>
+            <li><code>lugares</code>: Canchas oficiales para validación de disponibilidad.</li>
+            <li><code>partidos</code>: Fechas, horas, equipos enfrentados, marcadores y estados.</li>
+          </ul>
+        </div>
+        <div class="card-box">
+          <h4>🔒 Seguridad y Confiabilidad</h4>
+          <ul>
+            <li>Integridad referencial que impide registrar partidos con equipos inexistentes.</li>
+            <li>Persistencia en la nube para garantizar que nada se pierda al apagar el equipo.</li>
+            <li>Separación de permisos para blindar la información de modificaciones indebidas.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>I.E. Inocencio Chincá</span>
+      <span>Expone: María Ignacia Salón</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 9 -->
+  <section class="slide">
+    <div class="slide-header">
+      <span class="slide-badge">TRANSFORMACIÓN SOCIAL</span>
+      <span class="slide-number">09 / 10</span>
+    </div>
+    <div class="slide-body">
+      <h2 class="slide-title">Impacto en la Comunidad Chinquista</h2>
+      <p class="slide-subtitle">Los beneficios formativos y culturales del proyecto escolar.</p>
+      <div class="grid-3">
+        <div class="card-box">
+          <h4>🤝 Convivencia y Deporte</h4>
+          <p>Un torneo ordenado y transparente reduce las discusiones, potencia la sana competencia y une a los grados escolares.</p>
+        </div>
+        <div class="card-box">
+          <h4>🌱 Sostenibilidad Ecológica</h4>
+          <p>Elimina el desperdicio de cientos de fotocopias, planillas y carteleras descartadas tras cada torneo.</p>
+        </div>
+        <div class="card-box">
+          <h4>💡 Innovación SENATIC</h4>
+          <p>Evidencia el potencial de las estudiantes del grado 11° para aplicar la ingeniería de software a los retos de su entorno.</p>
+        </div>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>I.E. Inocencio Chincá</span>
+      <span>Expone: María Ignacia Salón</span>
+    </div>
+  </section>
+
+  <!-- SLIDE 10 -->
+  <section class="slide">
+    <div class="slide-header">
+      <span class="slide-badge">CIERRE Y LLAMADO A LA ACCIÓN</span>
+      <span class="slide-number">10 / 10</span>
+    </div>
+    <div class="slide-body cover-content">
+      <h2 class="slide-title" style="font-size: 32px; margin-bottom: 15px;">¡EL FUTURO DEL DEPORTE CHINQUISTA!</h2>
+      <p style="font-size: 16px; color: var(--gold-light); max-width: 650px; line-height: 1.6; margin-bottom: 24px;">
+        La plataforma está 100% desarrollada, testeada y lista para dar apertura al próximo campeonato intercursos de la I.E. Inocencio Chincá.
+      </p>
+      <div class="team-badge" style="background: rgba(201, 24, 43, 0.25); border-color: var(--gold);">
+        <h5 style="color: #fff; font-size: 13px;">GRACIAS POR SU ATENCIÓN</h5>
+        <p style="color: var(--gold-light); margin-top: 4px;">Danna Sofía Uribe • Nikol Dayanna Alvarado • María Ignacia Salón (Grado 1102)</p>
+      </div>
+    </div>
+    <div class="slide-footer">
+      <span>Sesión de Preguntas y Respuestas</span>
+      <span>Proyecto SENATIC 2026</span>
+    </div>
+  </section>
+
+</body>
+</html>

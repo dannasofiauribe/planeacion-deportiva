@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diapositivas de Sustentación | Intercursos Chincá - Grado 1102</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: #0d0101;
+      color: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow-x: hidden;
+    }
+
+    .top-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 52px;
+      background: rgba(18, 1, 1, 0.95);
+      border-bottom: 2px solid #b31414;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      z-index: 100;
+    }
+
+    .brand-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: bold;
+      color: #ff4d4d;
+      font-size: 1rem;
+      letter-spacing: 1px;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .top-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 77, 77, 0.4);
+      color: #ffffff;
+      padding: 6px 14px;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .top-btn:hover {
+      background: rgba(255, 77, 77, 0.25);
+      border-color: #ff4d4d;
+    }
+
+    .top-btn.active-notes {
+      background: #ffcc00;
+      color: #000000;
+      border-color: #ffcc00;
+    }
+
+    .presentation-container {
+      margin-top: 65px;
+      margin-bottom: 70px;
+      width: 94%;
+      max-width: 1080px;
+      aspect-ratio: 16 / 9;
+      min-height: 580px;
+      background: radial-gradient(circle at 50% 20%, #350404 0%, #150000 65%, #080000 100%);
+      border: 2px solid #ff4d4d;
+      border-radius: 14px;
+      box-shadow: 0 0 45px rgba(255, 77, 77, 0.35);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 35px 50px;
+      overflow: hidden;
+    }
+
+    .slide {
+      display: none;
+      height: 100%;
+      flex-direction: column;
+      justify-content: space-between;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .slide.active {
+      display: flex;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: bold;
+      color: #ffcc00;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    h1.slide-title {
+      font-size: 2.1rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 6px;
+      letter-spacing: 1px;
+    }
+
+    p.slide-subtitle {
+      color: #ffcccc;
+      font-size: 1.05rem;
+      margin-bottom: 20px;
+    }
+
+    .slide-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .card-problem {
+      background: rgba(50, 2, 2, 0.75);
+      border: 1px solid #ff4d4d;
+      border-radius: 8px;
+      padding: 18px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    }
+
+    .card-solution {
+      background: rgba(0, 35, 12, 0.75);
+      border: 2px solid #00c853;
+      border-radius: 8px;
+      padding: 22px;
+    }
+
+    .card-solution-alt {
+      background: rgba(45, 0, 0, 0.75);
+      border: 2px solid #ff4d4d;
+      border-radius: 8px;
+      padding: 22px;
+    }
+
+    .code-box {
+      background: #09090d;
+      border: 1px solid #ff4d4d;
+      border-radius: 8px;
+      padding: 16px;
+      font-family: 'Consolas', 'Courier New', monospace;
+      font-size: 0.88rem;
+      color: #e0e0e0;
+      line-height: 1.5;
+      text-align: left;
+      overflow-x: auto;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+    }
+
+    .code-keyword { color: #ff7b72; font-weight: bold; }
+    .code-func { color: #d2a8ff; }
+    .code-str { color: #a5d6ff; }
+    .code-comment { color: #8b949e; font-style: italic; }
+    .code-val { color: #79c0ff; }
+    .code-warn { color: #ffa657; font-weight: bold; }
+
+    .controls-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 54px;
+      background: rgba(14, 1, 1, 0.95);
+      border-top: 2px solid #b31414;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      z-index: 100;
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 12px;
+    }
+
+    .control-btn {
+      padding: 8px 20px;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+      border: none;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+    }
+
+    .btn-prev {
+      background: #333333;
+      color: #ffffff;
+    }
+
+    .btn-prev:hover {
+      background: #444444;
+    }
+
+    .btn-next {
+      background: #00c853;
+      color: #000000;
+    }
+
+    .btn-next:hover {
+      background: #00e676;
+    }
+
+    .dots-container {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.25);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .dot.active {
+      width: 26px;
+      border-radius: 6px;
+      background: #ffcc00;
+    }
+
+    .speaker-notes-drawer {
+      position: fixed;
+      bottom: 54px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 94%;
+      max-width: 1080px;
+      background: rgba(0, 0, 0, 0.95);
+      border: 1.5px solid #ffcc00;
+      border-bottom: none;
+      border-radius: 10px 10px 0 0;
+      padding: 16px 24px;
+      z-index: 90;
+      display: none;
+      box-shadow: 0 -6px 30px rgba(0,0,0,0.8);
+    }
+
+    .speaker-notes-drawer.open {
+      display: block;
+    }
+
+    .notes-title {
+      font-size: 0.8rem;
+      font-weight: bold;
+      color: #ffcc00;
+      letter-spacing: 1.5px;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .notes-text {
+      color: #ffffff;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      font-style: italic;
+    }
+
+    .comp-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    .comp-table th {
+      padding: 10px 14px;
+      text-align: left;
+      font-size: 0.95rem;
+    }
+
+    .comp-table td {
+      padding: 11px 14px;
+      border-bottom: 1px solid rgba(255, 77, 77, 0.25);
+      font-size: 0.92rem;
+    }
+
+    @media print {
+      .top-bar, .controls-bar, .speaker-notes-drawer { display: none !important; }
+      body { background: #ffffff !important; color: #000000 !important; }
+      .presentation-container {
+        width: 100% !important;
+        margin: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+        aspect-ratio: auto !important;
+        page-break-after: always;
+        background: #111111 !important;
+        color: #ffffff !important;
+      }
+      .slide { display: flex !important; margin-bottom: 50px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Barra Superior -->
+  <header class="top-bar">
+    <div class="brand-title">
+      <span>⚽ INTERCURSOS CHINCÁ • SUSTENTACIÓN OFICIAL</span>
+    </div>
+
+    <div class="top-actions">
+      <button class="top-btn" id="notesToggleBtn" onclick="toggleNotes()">
+        🎙️ Ver Guión del Orador
+      </button>
+      <button class="top-btn" onclick="window.print()">
+        🖨️ Imprimir / Guardar PDF
+      </button>
+      <button class="top-btn" onclick="toggleFullScreen()">
+        ⛶ Pantalla Completa (F11)
+      </button>
+    </div>
+  </header>
+
+  <!-- Contenedor Principal de Diapositivas -->
+  <main class="presentation-container">
+
+    <!-- DIAPOSITIVA 1: Portada -->
+    <section class="slide active" id="slide-0">
+      <div>
+        <span class="badge">PROYECTO DE ARTICULACIÓN SENATIC 2026</span>
+        <h1 class="slide-title" style="font-size: 2.8rem; margin-top: 5px;">INTERCURSOS CHINCÁ</h1>
+        <p class="slide-subtitle" style="font-size: 1.25rem; color: #ffdddd;">
+          Sistema de Gestión y Consulta para la Planeación Deportiva Escolar
+        </p>
+      </div>
+
+      <div class="slide-body" style="text-align: center;">
+        <div style="font-size: 4rem; margin-bottom: 8px;">🏆</div>
+        <p style="font-size: 1.3rem; color: #00e676; font-weight: bold; letter-spacing: 1px; margin-bottom: 16px;">
+          "Automatizando la pasión, organizando el juego."
+        </p>
+
+        <!-- Integrantes de 1102 -->
+        <div style="background: rgba(0, 0, 0, 0.7); border: 2px solid #ffcc00; border-radius: 12px; padding: 14px 24px; max-width: 680px; margin: 0 auto; box-shadow: 0 4px 20px rgba(0,0,0,0.6);">
+          <div style="font-size: 0.85rem; color: #ffcc00; font-weight: bold; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 8px;">
+            🎓 EQUIPO DE DESARROLLADORAS • GRADO 1102
+          </div>
+          <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; font-size: 1.1rem; font-weight: bold; color: #ffffff;">
+            <span>👩‍💻 Danna Sofía Uribe</span>
+            <span>👩‍💻 Nikol Dayanna Alvarado</span>
+            <span>👩‍💻 María Ignacia Camargo</span>
+          </div>
+          <div style="font-size: 0.85rem; color: #ffdddd; margin-top: 6px;">
+            Institución Educativa Inocencio Chincá • Articulación Media Técnica SENATIC 2026
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; justify-content: space-between; border-top: 1px solid rgba(255,77,77,0.3); padding-top: 10px; font-size: 0.85rem; color: #ffaaaa;">
+        <span>Desarrolladoras: Danna Uribe, Nikol Alvarado, María Camargo (1102)</span>
+        <span>I.E. Inocencio Chincá • SENATIC 2026</span>
+      </div>
+    </section>
+
+    <!-- DIAPOSITIVA 2: La Problemática -->
+    <section class="slide" id="slide-1">
+      <div>
+        <span class="badge">DIAGNÓSTICO INSTITUCIONAL</span>
+        <h1 class="slide-title">EL PROBLEMA QUE RESOLVEMOS</h1>
+        <p class="slide-subtitle">¿Cómo se organizan los torneos escolares tradicionalmente?</p>
+      </div>
+
+      <div class="slide-body">
+        <div class="grid-2">
+          <div class="card-problem">
+            <h3 style="color: #ff4d4d; margin-bottom: 6px; font-size: 1.15rem;">❌ Planillas en Papel y Cuadernos</h3>
+            <p style="color: #e0e0e0; font-size: 0.9rem; line-height: 1.45;">
+              Inscripciones y marcadores en hojas que se rompen, manchan o traspapelan. Cero respaldo digital histórico.
+            </p>
+          </div>
+          <div class="card-problem">
+            <h3 style="color: #ff4d4d; margin-bottom: 6px; font-size: 1.15rem;">❌ Choque de Canchas y Horarios</h3>
+            <p style="color: #e0e0e0; font-size: 0.9rem; line-height: 1.45;">
+              Dos grados citados a la misma hora en la Cancha Principal provocando discusiones y retrasos en el calendario.
+            </p>
+          </div>
+          <div class="card-problem">
+            <h3 style="color: #ff4d4d; margin-bottom: 6px; font-size: 1.15rem;">❌ Desinformación en Estudiantes</h3>
+            <p style="color: #e0e0e0; font-size: 0.9rem; line-height: 1.45;">
+              Docentes saturados en los descansos con alumnos preguntando: "¿Profe a qué hora juego? ¿Quién ganó ayer?".
+            </p>
+          </div>
+          <div class="card-problem">
+            <h3 style="color: #ff4d4d; margin-bottom: 6px; font-size: 1.15rem;">❌ Sobrecarga Administrativa</h3>
+            <p style="color: #e0e0e0; font-size: 0.9rem; line-height: 1.45;">
+              Más de 25 horas semanales gastadas armando llaves y cuadrantes manualmente en lugar de orientar la clase.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div style="font-size: 0.85rem; color: #ffcc00;">
+        💡 <strong>Impacto:</strong> Afecta a más de 800 estudiantes y 40 equipos en 5 disciplinas deportivas.
+      </div>
+    </section>
+
+    <!-- DIAPOSITIVA 3: La Solución -->
+    <section class="slide" id="slide-2">
+      <div>
+        <span class="badge">PROPUESTA DE VALOR</span>
+        <h1 class="slide-title">LA SOLUCIÓN: INTERCURSOS CHINCÁ</h1>
+        <p class="slide-subtitle">Ecosistema web integral con doble experiencia de usuario</p>
+      </div>
+
+      <div class="slide-body">
+        <div class="grid-2">
+          <div class="card-solution">
+            <h3 style="color: #00e676; font-size: 1.3rem; margin-bottom: 10px;">⚙️ Panel de Administración</h3>
+            <ul style="color: #e0ffe8; font-size: 0.92rem; line-height: 1.7; padding-left: 18px;">
+              <li>Inscripción inmediata por deportes (Fútbol, Baloncesto, Voleibol, Atletismo, Microfútbol).</li>
+              <li><strong>Motor estricto anti-conflictos</strong> que bloquea colisiones de canchas.</li>
+              <li>Mesa de control para editar marcadores y estados (<em>Programado, En Juego, Finalizado</em>).</li>
+            </ul>
+          </div>
+
+          <div class="card-solution-alt">
+            <h3 style="color: #ff7777; font-size: 1.3rem; margin-bottom: 10px;">👁️ Vista Visitante / Estudiantes</h3>
+            <ul style="color: #ffdddd; font-size: 0.92rem; line-height: 1.7; padding-left: 18px;">
+              <li>Consulta pública en vivo sin necesidad de crear usuario ni contraseña.</li>
+              <li><strong>Atajos rápidos de un solo toque</strong> para cada grado escolar.</li>
+              <li>Filtros cruzados por deporte, cancha asignada y estado del partido.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align: center; color: #00ffcc; font-size: 0.9rem; font-weight: bold;">
+        ⚡ 100% digital, accesible en cualquier celular, tablet o computador.
+      </div>
+    </section>
+
+    <!-- DIAPOSITIVA 4: Arquitectura y Base de Datos -->
+    <section class="slide" id="slide-3">
+      <div>
+        <span class="badge">INGENIERÍA Y ESTRUCTURA</span>
+        <h1 class="slide-title">MODELO DE DATOS Y ARQUITECTURA</h1>
+        <p class="slide-subtitle">Esquema relacional en Supabase / PostgreSQL</p>
+      </div>
+
+      <div class="slide-body">
+        <div class="grid-2" style="align-items: center;">
+          <div style="background: rgba(0,0,0,0.5); border: 1px solid #ff4d4d; border-radius: 8px; padding: 18px; text-align: left;">
+            <h4 style="color: #ffcc00; margin-bottom: 10px; font-size: 1.05rem;">Tablas Principales:</h4>
+            <div style="font-size: 0.88rem; line-height: 1.8; color: #ffffff;">
+              <div>📂 <strong style="color: #ff7777;">deportes:</strong> id, nombre, icono, lugar_default</div>
+              <div>📂 <strong style="color: #ff7777;">lugares:</strong> Cancha Principal, Cubierta, Coliseo, etc.</div>
+              <div>📂 <strong style="color: #ff7777;">equipos:</strong> id, nombre, deporte_id (relación N:1)</div>
+              <div>📂 <strong style="color: #ff7777;">partidos:</strong> equipo_local, equipo_visitante, lugar, fecha_hora, fase, marcadores, estado, ganador</div>
+            </div>
+          </div>
+
+          <div class="code-box">
+            <div class="code-comment">// types.ts - Tipado Estricto con TypeScript</div>
+            <div><span class="code-keyword">export interface</span> <span class="code-func">Partido</span> {</div>
+            <div>&nbsp;&nbsp;id: <span class="code-val">string</span>;</div>
+            <div>&nbsp;&nbsp;deporte_id: <span class="code-val">SportKey</span>;</div>
+            <div>&nbsp;&nbsp;equipo_local: <span class="code-val">string</span>;</div>
+            <div>&nbsp;&nbsp;equipo_visitante: <span class="code-val">string</span>;</div>
+            <div>&nbsp;&nbsp;lugar: <span class="code-val">string</span>;</div>
+            <div>&nbsp;&nbsp;fecha_hora: <span class="code-val">string</span>;</div>
+            <div>&nbsp;&nbsp;estado: <span class="code-str">'Programado'</span> | <span class="code-str">'En Juego'</span> | <span class="code-str">'Finalizado'</span>;</div>
+            <div>}</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="font-size: 0.82rem; color: #ffdddd;">
+        🛡️ Tipado estricto que previene errores de ejecución y asegura integridad referencial.
+      </div>
+    </section>
+
+    <!-- DIAPOSITIVA 5: El Código de la Solución -->
+    <section class="slide" id="slide-4">
+      <div>
+        <span class="badge">EL CORAZÓN DEL CÓDIGO</span>
+        <h1 class="slide-title">ALGORITMO ANTI-COLISIONES</h1>
+        <p class="slide-subtitle">Cómo el código soluciona el problema de los choques de cancha</p>
+      </div>
+
+      <div class="slide-body">
+        <div class="code-box" style="font-size: 0.92rem; padding: 20px;">
+          <div class="code-comment">// src/context/TournamentContext.tsx - Validación de disponibilidad</div>
+          <div><span class="code-keyword">const</span> <span class="code-func">programarPartido</span> = (nuevo: <span class="code-func">Partido</span>) =&gt; {</div>
+          <div style="margin-left: 20px;" class="code-comment">// Comprobar si la cancha ya está reservada en esa fecha y hora</div>
+          <div style="margin-left: 20px;"><span class="code-keyword">const</span> conflicto = partidos.<span class="code-func">find</span>(p =&gt; </div>
+          <div style="margin-left: 40px;">p.lugar === nuevo.lugar &amp;&amp; p.fecha_hora === nuevo.fecha_hora</div>
+          <div style="margin-left: 20px;">);</div>
+          <br>
+          <div style="margin-left: 20px;"><span class="code-keyword">if</span> (conflicto) {</div>
+          <div style="margin-left: 40px;"><span class="code-keyword">return</span> {</div>
+          <div style="margin-left: 60px;">ok: <span class="code-val">false</span>,</div>
+          <div style="margin-left: 60px;">mensaje: <span class="code-warn">`⚠️ Conflicto: "${nuevo.lugar}" ya tiene programado el partido "${conflicto.equipo_local} vs ${conflicto.equipo_visitante}" en ese horario.`</span></div>
+          <div style="margin-left: 40px;">};</div>
+          <div style="margin-left: 20px;">}</div>
+          <div style="margin-left: 20px;"><span class="code-comment">// Si no hay conflicto, se registra con éxito</span></div>
+          <div style="margin-left: 20px;">setPartidos(prev =&gt; [nuevo, ...prev]);</div>
+          <div>};</div>
+        </div>
+      </div>
+
+      <div style="color: #00ffcc; font-weight: bold; font-size: 0.9rem;">
+        ✅ Garantía lógica: Ningún partido se puede programar en el mismo escenario al mismo tiempo.
+      </div>
+    </section>
+
+    <!-- DIAPOSITIVA 6: Usabilidad y Atajos Rápidos -->
+    <section class="slide" id="slide-5">
+      <div>
+        <span class="badge">EXPERIENCIA ESTUDIANTIL</span>
+        <h1 class="slide-title">FILTRADO REACTIVO Y ATAJOS RÁPIDOS</h1>
+        <p class="slide-subtitle">Diseñado para la agilidad de los estudiantes en sus celulares</p>
+      </div>
+
+      <div class="slide-body" style="text-align: center;">
+        <p style="color: #ffdddd; font-size: 1rem; margin-bottom: 18px;">
+          Un estudiante no quiere llenar formularios. Con solo presionar el botón de su grado o equipo filtra la tabla al instante:
+        </p>
+
+        <div style="display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-bottom: 25px;">
+          <span style="background: #2b2b2b; color: #fff; padding: 7px 16px; border-radius: 5px; font-weight: bold; border: 1px solid #555;">10</span>
+          <span style="background: #ffcc00; color: #000; padding: 7px 16px; border-radius: 5px; font-weight: bold; border: 1px solid #ffcc00;">6 (Activo)</span>
+          <span style="background: #2b2b2b; color: #fff; padding: 7px 16px; border-radius: 5px; font-weight: bold; border: 1px solid #555;">7</span>
+          <span style="background: #2b2b2b; color: #fff; padding: 7px 16px; border-radius: 5px; font-weight: bold; border: 1px solid #555;">9</span>
+          <span style="background: #2b2b2b; color: #fff; padding: 7px 16px; border-radius: 5px; font-weight: bold; border: 1px solid #555;">Los carajos</span>
+          <span style="background: #2b2b2b; color: #fff; padding: 7px 16px; border-radius: 5px; font-weight: bold; border: 1px solid #555;">los ignorantes de 1103</span>
+          <span style="background: #2b2b2b; color: #fff; padding: 7px 16px; border-radius: 5px; font-weight: bold; border: 1px solid #555;">pepitas</span>
+          <span style="background: #8b0000; color: #fff; padding: 7px 16px; border-radius: 5px; font-weight: bold; border: 1px solid #ff4d4d;">Ver Todos</span>
+        </div>
+
+        <div style="background: rgba(35, 3, 3, 0.9); border: 1px solid #ff4d4d; border-radius: 10px; padding: 18px; max-width: 650px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
+          <div style="text-align: left;">
+            <div style="font-weight: bold; color: #ffcc00;">⚽ Fútbol • Cuartos de Final</div>
+            <div style="font-size: 0.85rem; color: #fff;">📍 Cancha Principal • 🕒 08:00 AM</div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 15px;">
+            <span style="font-weight: bold; font-size: 1.1rem; color: #00ffcc;">6 👑</span>
+            <span style="background: #000; border: 2px solid #ffcc00; padding: 4px 14px; font-family: monospace; font-size: 1.3rem; color: #ffcc00; border-radius: 6px;">2 - 1</span>
+            <span style="font-weight: bold; font-size: 1.1rem; color: #fff;">7</span>
+          </div>
+          <span style="background: rgba(0,200,83,0.2); border: 1px solid #00c853; color: #00e676; padding: 4px 10px; border-radius: 20px; font-size: 0.78rem; font-weight: bold;">
+            Finalizado
+          </span>
+        </div>
+      </div>
+
+      <div style="font-size: 0.85rem; color: #ffdddd;">
+        ⚡ Filtrado ultrarrápido en el cliente con el hook <code style="color: #ffcc00;">useMemo</code> de React sin recargas de página.
+      </div>
+    </section>
+
+    <!-- DIAPOSITIVA 7: Propuesta Comercial / Venta -->
+    <section class="slide" id="slide-6">
+      <div>
+        <span class="badge">MATRIZ DE VALOR COMERCIAL</span>
+        <h1 class="slide-title">¿POR QUÉ COMPRAR ESTA PLATAFORMA?</h1>
+        <p class="slide-subtitle">Retorno de inversión institucional en tiempo, orden e imagen</p>
+      </div>
+
+      <div class="slide-body">
+        <table class="comp-table">
+          <thead>
+            <tr>
+              <th style="background: #4a0505; color: #ffaaaa; border-radius: 6px 0 0 0;">Método Tradicional (Papel)</th>
+              <th style="background: #005020; color: #aaffcc; border-radius: 0 6px 0 0;">Con Intercursos Chincá</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="color: #ffcccc;">⏳ 25+ horas semanales armando planillas a mano</td>
+              <td style="color: #00ffcc; font-weight: bold;">⚡ Menos de 30 minutos de configuración semanal</td>
+            </tr>
+            <tr>
+              <td style="color: #ffcccc;">❌ Cruces constantes de canchas y discusiones</td>
+              <td style="color: #00ffcc; font-weight: bold;">🛡️ 0% choques de horarios (Validación estricta)</td>
+            </tr>
+            <tr>
+              <td style="color: #ffcccc;">❓ Rumores sobre quién ganó o clasificó</td>
+              <td style="color: #00ffcc; font-weight: bold;">📱 Marcadores y ganadores oficiales auditables en vivo</td>
+            </tr>
+            <tr>
+              <td style="color: #ffcccc;">📁 Hojas rotas o traspapeladas en el colegio</td>
+              <td style="color: #00ffcc; font-weight: bold;">☁️ Información centralizada y disponible 24/7</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="background: rgba(0,0,0,0.4); padding: 10px; border-radius: 6px; text-align: center; color: #ffcc00; font-size: 0.9rem;">
+        💰 <strong>Conclusión comercial:</strong> Eleva el nivel del colegio de un torneo informal a una copa deportiva profesional.
+      </div>
+    </section>
+
+    <!-- DIAPOSITIVA 8: Cierre y Preguntas -->
+    <section class="slide" id="slide-7">
+      <div>
+        <span class="badge">CONCLUSIONES Y PREGUNTAS</span>
+        <h1 class="slide-title">EL FUTURO DEL DEPORTE ESCOLAR</h1>
+        <p class="slide-subtitle">Una solución real nacida desde y para la I.E. Inocencio Chincá</p>
+      </div>
+
+      <div class="slide-body" style="text-align: center;">
+        <div style="font-size: 3.5rem; margin-bottom: 8px;">⚽🏆</div>
+        <h2 style="font-size: 1.7rem; color: #ffffff; margin-bottom: 4px;">INTERCURSOS CHINCÁ</h2>
+        <p style="font-size: 1.15rem; color: #00e676; font-weight: bold; margin-bottom: 14px;">
+          "Automatizando la pasión, organizando el juego."
+        </p>
+
+        <!-- Bloque de Integrantes Grado 1102 -->
+        <div style="background: rgba(0, 0, 0, 0.7); border: 2px solid #ffcc00; border-radius: 12px; padding: 14px 24px; max-width: 680px; margin: 0 auto 14px auto; box-shadow: 0 0 25px rgba(255, 204, 0, 0.25);">
+          <div style="font-size: 0.85rem; color: #ffcc00; font-weight: bold; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 8px;">
+            🎓 EQUIPO DE DESARROLLADORAS • GRADO 1102
+          </div>
+          <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; font-size: 1.1rem; font-weight: bold; color: #ffffff;">
+            <span>👩‍💻 Danna Sofía Uribe</span>
+            <span>👩‍💻 Nikol Dayanna Alvarado</span>
+            <span>👩‍💻 María Ignacia Camargo</span>
+          </div>
+          <div style="font-size: 0.85rem; color: #ffdddd; margin-top: 6px;">
+            Institución Educativa Inocencio Chincá • Articulación Media Técnica SENATIC 2026
+          </div>
+        </div>
+
+        <div style="display: inline-flex; gap: 20px; background: rgba(0,0,0,0.6); padding: 8px 20px; border-radius: 8px; border: 1px solid #ff4d4d; font-size: 0.85rem;">
+          <span>✅ Proyecto SENATIC 2026</span>
+          <span>•</span>
+          <span>✅ 100% Funcional y Probado</span>
+          <span>•</span>
+          <span>✅ Listo para Implementar</span>
+        </div>
+      </div>
+
+      <div style="text-align: center; color: #ffcccc; font-size: 0.95rem;">
+        ¡Muchas gracias por su atención! Abrimos la sesión de preguntas y demostración en vivo.
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Panel de Notas del Orador -->
+  <div class="speaker-notes-drawer" id="speakerNotesDrawer">
+    <div class="notes-title">
+      <span>🎙️ GUION DEL ORADOR (QUÉ DECIR EN ESTA DIAPOSITIVA):</span>
+    </div>
+    <div class="notes-text" id="notesContent">
+      Cargando guión...
+    </div>
+  </div>
+
+  <!-- Barra de Controles Inferior -->
+  <footer class="controls-bar">
+    <div class="nav-buttons">
+      <button class="control-btn btn-prev" onclick="prevSlide()">← Anterior</button>
+      <button class="control-btn btn-next" onclick="nextSlide()">Siguiente →</button>
+    </div>
+
+    <div class="dots-container" id="dotsContainer"></div>
+
+    <div style="font-size: 0.9rem; color: #ffcc00; font-weight: bold;">
+      <span id="slideCounter">1</span> / 8
+    </div>
+  </footer>
+
+  <script>
+    const speakerNotes = [
+      "Muy buenos días a todos los jurados, docentes y directivos presentes. Somos Danna Sofía Uribe, Nikol Dayanna Alvarado y María Ignacia Camargo, estudiantes del grado 1102 de la I.E. Inocencio Chincá. Hoy venimos a presentar la solución tecnológica a un dolor de cabeza que vive todo colegio: el desorden, los reclamos y el tiempo perdido en los torneos escolares. Les presentamos Intercursos Chincá.",
+      "Identificamos que en nuestro colegio las planillas se hacían en hojas sueltas que se rompían, y con frecuencia dos grados llegaban a jugar a la misma hora en la Cancha Principal generando discusiones. El profesor pasaba los recreos respondiendo preguntas en vez de descansar.",
+      "Para resolverlo creamos Intercursos Chincá, un software dividido en dos partes: un panel administrativo para que el profesor inscriba equipos y programe partidos sin errores, y una vista pública donde cualquier estudiante consulta desde su celular en segundos.",
+      "A nivel de ingeniería, la plataforma modela 4 entidades principales en TypeScript y PostgreSQL: deportes, lugares, equipos y partidos. Cada entidad tiene tipado estricto para evitar fallos de ejecución y permitir añadir nuevas disciplinas en cualquier momento.",
+      "Este es el corazón del código que resuelve el problema. Cuando el docente programa un partido, la función audita el arreglo de encuentros. Si la cancha y el horario ya están ocupados, el sistema bloquea la acción con un mensaje de alerta. Cero cruces de canchas garantizado.",
+      "Pensando en los estudiantes, implementamos Atajos Rápidos en la vista pública. Con solo tocar el botón de su grado o apodo, la tabla filtra en milisegundos usando useMemo de React, sin recargar la página y mostrando los marcadores oficiales y el ganador con corona.",
+      "¿Por qué comprar esta plataforma? Porque le ahorra 25 horas semanales a los docentes, elimina las discusiones en el patio por canchas ocupadas, moderniza la imagen de la institución y convierte un torneo desorganizado en un evento escolar de nivel profesional.",
+      "Intercursos Chincá, creado por Danna Sofía Uribe, Nikol Dayanna Alvarado y María Ignacia Camargo del grado 1102, demuestra cómo la articulación técnica SENATIC resuelve un problema cotidiano real con tecnología de vanguardia. La aplicación está lista para usarse. Muchas gracias y quedamos atentas a sus preguntas."
+    ];
+
+    let currentSlideIndex = 0;
+    const totalSlides = 8;
+
+    function renderDots() {
+      const container = document.getElementById('dotsContainer');
+      container.innerHTML = '';
+      for (let i = 0; i < totalSlides; i++) {
+        const dot = document.createElement('div');
+        dot.className = `dot ${i === currentSlideIndex ? 'active' : ''}`;
+        dot.onclick = () => goToSlide(i);
+        container.appendChild(dot);
+      }
+    }
+
+    function updateSlide() {
+      document.querySelectorAll('.slide').forEach((s, idx) => {
+        s.classList.toggle('active', idx === currentSlideIndex);
+      });
+      document.getElementById('slideCounter').innerText = currentSlideIndex + 1;
+      document.getElementById('notesContent').innerText = `"${speakerNotes[currentSlideIndex]}"`;
+      renderDots();
+    }
+
+    function nextSlide() {
+      if (currentSlideIndex < totalSlides - 1) {
+        currentSlideIndex++;
+        updateSlide();
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlideIndex > 0) {
+        currentSlideIndex--;
+        updateSlide();
+      }
+    }
+
+    function goToSlide(idx) {
+      currentSlideIndex = idx;
+      updateSlide();
+    }
+
+    function toggleNotes() {
+      const drawer = document.getElementById('speakerNotesDrawer');
+      const btn = document.getElementById('notesToggleBtn');
+      drawer.classList.toggle('open');
+      btn.classList.toggle('active-notes');
+    }
+
+    function toggleFullScreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => {
+          alert(`Error al activar pantalla completa: ${err.message}`);
+        });
+      } else {
+        document.exitFullscreen();
+      }
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') {
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        prevSlide();
+      } else if (e.key.toLowerCase() === 'n') {
+        toggleNotes();
+      }
+    });
+
+    updateSlide();
+  </script>
+</body>
+</html>

@@ -7,8 +7,8 @@ interface InicioViewProps {
 
 export const InicioView: FC<InicioViewProps> = ({ onNavigate }) => {
   return (
-    <div className="container" style={{ marginTop: '25px', maxWidth: '780px' }}>
-      {/* Caja blanca con resplandor rojo del logo central idéntica a image_13dbfd6f.png */}
+    <div className="container" style={{ marginTop: '20px', maxWidth: '780px' }}>
+      {/* Logo principal con resplandor rojo original */}
       <div
         style={{
           display: 'inline-block',
@@ -42,7 +42,7 @@ export const InicioView: FC<InicioViewProps> = ({ onNavigate }) => {
           borderRadius: '8px',
           padding: '24px 28px',
           maxWidth: '560px',
-          margin: '30px auto 20px auto',
+          margin: '25px auto 20px auto',
           textAlign: 'center',
           boxShadow: '0 0 18px rgba(0, 170, 68, 0.25)',
           cursor: 'pointer',
